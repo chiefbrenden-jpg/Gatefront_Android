@@ -1,0 +1,20 @@
+apply plugin: 'com.android.application'
+
+android {
+    namespace 'com.brendanmolloy.gatefront'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.brendanmolloy.gatefront'
+        minSdk 23
+        targetSdk 35
+        versionCode 601
+        versionName '0.6.1'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+}
