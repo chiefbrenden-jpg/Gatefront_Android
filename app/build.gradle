@@ -12,9 +12,20 @@ android {
         versionName '0.6.1'
     }
 
+    signingConfigs {
+        release {
+            storeFile file('../signing/gatefront-release.p12')
+            storePassword 'Gatefront060!'
+            keyAlias 'gatefront'
+            keyPassword 'Gatefront060!'
+            storeType 'pkcs12'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
         }
     }
 }

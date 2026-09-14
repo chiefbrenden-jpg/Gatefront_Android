@@ -34,22 +34,6 @@ jobs:
       - name: Build release APK
         run: ./gradlew --no-daemon clean assembleRelease
 
-      - name: Sign release APK
-        run: |
-          UNSIGNED="app/build/outputs/apk/release/app-release-unsigned.apk"
-          SIGNED="app/build/outputs/apk/release/app-release.apk"
-          BUILD_TOOLS="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
-          keytool -genkeypair -v -keystore "$RUNNER_TEMP/gatefront-build.jks" \
-            -storepass gatefront-build -keypass gatefront-build -alias gatefront \
-            -keyalg RSA -keysize 2048 -validity 10000 \
-            -dname "CN=Gatefront, OU=Android, O=Gatefront, L=Gorey, C=IE"
-          "$BUILD_TOOLS/zipalign" -f -p 4 "$UNSIGNED" "$RUNNER_TEMP/gatefront-aligned.apk"
-          "$BUILD_TOOLS/apksigner" sign \
-            --ks "$RUNNER_TEMP/gatefront-build.jks" \
-            --ks-pass pass:gatefront-build \
-            --key-pass pass:gatefront-build \
-            --out "$SIGNED" "$RUNNER_TEMP/gatefront-aligned.apk"
-
       - name: Verify APK signature
         run: |
           APK="app/build/outputs/apk/release/app-release.apk"

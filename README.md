@@ -10,4 +10,4 @@ This is a genuine Android Studio/Gradle application built around the Gatefront 0
 
 Open this folder in Android Studio and run the `app` configuration. The release APK is built with `./gradlew assembleRelease`.
 
-Release signing material is intentionally not stored in this public repository. The automated workflow creates an isolated build key for its downloadable APK artifact.
+The included release keystore is required to sign later updates with the same identity. Its password is `Gatefront060!`; keep it private and backed up.
