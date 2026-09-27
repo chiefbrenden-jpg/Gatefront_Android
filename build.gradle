@@ -7,3 +7,14 @@ buildscript {
         classpath 'com.android.tools.build:gradle:8.5.2'
     }
 }
+
+// Keep release numbering outside app/build.gradle so signing credentials are
+// never rewritten merely to publish a new gameplay build.
+subprojects { project ->
+    project.afterEvaluate {
+        if (project.name == 'app' && project.hasProperty('android')) {
+            project.android.defaultConfig.versionCode = 700
+            project.android.defaultConfig.versionName = '0.7.0'
+        }
+    }
+}
